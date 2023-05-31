@@ -1,6 +1,6 @@
+import 'package:app_semangka/CameraPage.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:app_semangka/CameraPage.dart';
 
 class KlasJen extends StatefulWidget {
   const KlasJen({super.key});
