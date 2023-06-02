@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
             Column(
               children: [
                 Center(
-                  child: Row(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
