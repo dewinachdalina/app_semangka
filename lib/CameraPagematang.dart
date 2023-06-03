@@ -14,7 +14,10 @@ class CameraPage extends StatefulWidget {
 }
 
 class _CameraPageState extends State<CameraPage> {
+  String result = "";
   late CameraController _cameraController;
+  late CameraImage _cameraImage;
+  bool isWorking = false;
   bool _isRearCameraSelected = true;
 
   loadModel() async {
@@ -22,6 +25,57 @@ class _CameraPageState extends State<CameraPage> {
       model: "kematangbest-fp16.tflite",
       labels: "kematang.txt",
     );
+  }
+
+  initCamera(CameraDescription cameraDescription) {
+    _cameraController =
+        CameraController(widget.cameras![0], ResolutionPreset.high);
+    _cameraController.initialize().then((value) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _cameraController.startImageStream((imageFromStream) => {
+              if (!isWorking)
+                {
+                  isWorking = true,
+                  _cameraImage = imageFromStream,
+                  runModelOnStreamFrames(),
+                }
+            });
+      });
+    });
+  }
+
+  runModelOnStreamFrames() async {
+    // ignore: unnecessary_null_comparison
+    if (_cameraImage != null) {
+      var recognitions = await Tflite.runModelOnFrame(
+        bytesList: _cameraImage.planes.map((plane) {
+          return plane.bytes;
+        }).toList(),
+        imageHeight: _cameraImage.height,
+        imageWidth: _cameraImage.width,
+        imageMean: 127.5,
+        imageStd: 127.5,
+        rotation: 90,
+        numResults: 2,
+        threshold: 0.1,
+        asynch: true,
+      );
+
+      result = "";
+      recognitions?.forEach((response) {
+        result += response["label"] +
+            " " +
+            (response["cofidence"] as double).toStringAsFixed(2) +
+            "\n\n";
+      });
+      setState(() {
+        result;
+      });
+      isWorking = false;
+    }
   }
 
   @override
@@ -34,8 +88,6 @@ class _CameraPageState extends State<CameraPage> {
   @override
   void initState() {
     super.initState();
-    initCamera(widget.cameras![0]);
-
     loadModel();
   }
 
@@ -58,19 +110,6 @@ class _CameraPageState extends State<CameraPage> {
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
       return null;
-    }
-  }
-
-  Future initCamera(CameraDescription cameraDescription) async {
-    _cameraController =
-        CameraController(cameraDescription, ResolutionPreset.high);
-    try {
-      await _cameraController.initialize().then((_) {
-        if (!mounted) return;
-        setState(() {});
-      });
-    } on CameraException catch (e) {
-      debugPrint("camera error $e");
     }
   }
 
