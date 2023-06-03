@@ -26,7 +26,6 @@ class _CameraPageState extends State<CameraPage> {
   void initState() {
     super.initState();
     initCamera(widget.cameras![0]);
-    loadmodel();
   }
 
   Future takePicture() async {
