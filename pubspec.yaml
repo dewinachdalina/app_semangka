@@ -64,8 +64,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-  - lib/data/kematangbest.pt
-  - lib/data/jenisbest.pt
+  - assets/kematangbest-fp16.tflite
+  - assets/kematang.txt
+  - assets/kematangbest.pt
+  - assets/jenisbest.pt
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

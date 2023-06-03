@@ -2,6 +2,7 @@ import 'package:app_semangka/PreviewPage.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tflite/tflite.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key, required this.cameras}) : super(key: key);
@@ -16,9 +17,17 @@ class _CameraPageState extends State<CameraPage> {
   late CameraController _cameraController;
   bool _isRearCameraSelected = true;
 
+  loadModel() async {
+    await Tflite.loadModel(
+      model: "kematangbest-fp16.tflite",
+      labels: "kematang.txt",
+    );
+  }
+
   @override
-  void dispose() {
+  void dispose() async {
     super.dispose();
+    await Tflite.close();
     _cameraController.dispose();
   }
 
@@ -26,6 +35,8 @@ class _CameraPageState extends State<CameraPage> {
   void initState() {
     super.initState();
     initCamera(widget.cameras![0]);
+
+    loadModel();
   }
 
   Future takePicture() async {
