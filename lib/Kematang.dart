@@ -1,4 +1,4 @@
-import 'package:app_semangka/CameraPage.dart';
+import 'package:app_semangka/CameraPagematang.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
