@@ -23,14 +23,15 @@ class _CameraPageState extends State<CameraPage> {
 
   @override
   void dispose() {
-    _cameraController.dispose();
     super.dispose();
+    _cameraController.dispose();
   }
 
   @override
   void initState() {
     super.initState();
     initCamera(widget.cameras![0]);
+    loadmodel();
   }
 
   Future takePicture() async {
