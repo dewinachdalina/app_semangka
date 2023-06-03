@@ -18,7 +18,7 @@ class _CameraPageState extends State<CameraPage> {
   bool _isRearCameraSelected = true;
 
   loadmodel() async {
-    await PyTorchMobile.loadModel('data/kematangbest.pt');
+    await PyTorchMobile.loadModel('lib/data/kematangbest.pt');
   }
 
   @override
