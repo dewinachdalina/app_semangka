@@ -2,6 +2,7 @@ import 'package:app_semangka/PreviewPage.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pytorch_mobile/pytorch_mobile.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key, required this.cameras}) : super(key: key);
@@ -15,6 +16,10 @@ class CameraPage extends StatefulWidget {
 class _CameraPageState extends State<CameraPage> {
   late CameraController _cameraController;
   bool _isRearCameraSelected = true;
+
+  loadmodel() async {
+    await PyTorchMobile.loadModel('data/kematangbest.pt');
+  }
 
   @override
   void dispose() {
