@@ -2,35 +2,93 @@ import 'package:app_semangka/PreviewPage.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pytorch_mobile/pytorch_mobile.dart';
+import 'package:tflite/tflite.dart';
 
-class CameraPage extends StatefulWidget {
-  const CameraPage({Key? key, required this.cameras}) : super(key: key);
+class CameraPageJenis extends StatefulWidget {
+  const CameraPageJenis({Key? key, required this.cameras}) : super(key: key);
 
-  final List<CameraDescription>? cameras;
+  final List<CameraDescription> cameras;
 
   @override
-  State<CameraPage> createState() => _CameraPageState();
+  State<CameraPageJenis> createState() => _CameraPageJenisState();
 }
 
-class _CameraPageState extends State<CameraPage> {
+class _CameraPageJenisState extends State<CameraPageJenis> {
+  String result = "";
   late CameraController _cameraController;
+  late CameraImage _cameraImage;
+  bool isWorking = false;
   bool _isRearCameraSelected = true;
 
-  loadmodel() async {
-    await PyTorchMobile.loadModel('lib/data/jenisbest.pt');
+  loadModel() async {
+    await Tflite.loadModel(
+      model: "jenisbest-fp16.tflite",
+      labels: "jenis.txt",
+    );
+  }
+
+  initCamera(CameraDescription cameraDescription) {
+    _cameraController =
+        CameraController(widget.cameras[0], ResolutionPreset.high);
+    _cameraController.initialize().then((value) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _cameraController.startImageStream((imageFromStream) => {
+              if (!isWorking)
+                {
+                  isWorking = true,
+                  _cameraImage = imageFromStream,
+                  runModelOnStreamFrames(),
+                }
+            });
+      });
+    });
+  }
+
+  runModelOnStreamFrames() async {
+    // ignore: unnecessary_null_comparison
+    if (_cameraImage != null) {
+      var recognitions = await Tflite.runModelOnFrame(
+        bytesList: _cameraImage.planes.map((plane) {
+          return plane.bytes;
+        }).toList(),
+        imageHeight: _cameraImage.height,
+        imageWidth: _cameraImage.width,
+        imageMean: 127.5,
+        imageStd: 127.5,
+        rotation: 90,
+        numResults: 2,
+        threshold: 0.1,
+        asynch: true,
+      );
+
+      result = "";
+      recognitions?.forEach((response) {
+        result += response["label"] +
+            " " +
+            (response["cofidence"] as double).toStringAsFixed(2) +
+            "\n\n";
+      });
+      setState(() {
+        result;
+      });
+      isWorking = false;
+    }
   }
 
   @override
-  void dispose() {
-    _cameraController.dispose();
+  void dispose() async {
     super.dispose();
+    await Tflite.close();
+    _cameraController.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    initCamera(widget.cameras![0]);
+    loadModel();
   }
 
   Future takePicture() async {
@@ -52,19 +110,6 @@ class _CameraPageState extends State<CameraPage> {
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
       return null;
-    }
-  }
-
-  Future initCamera(CameraDescription cameraDescription) async {
-    _cameraController =
-        CameraController(cameraDescription, ResolutionPreset.high);
-    try {
-      await _cameraController.initialize().then((_) {
-        if (!mounted) return;
-        setState(() {});
-      });
-    } on CameraException catch (e) {
-      debugPrint("camera error $e");
     }
   }
 
@@ -99,7 +144,7 @@ class _CameraPageState extends State<CameraPage> {
                   onPressed: () {
                     setState(
                         () => _isRearCameraSelected = !_isRearCameraSelected);
-                    initCamera(widget.cameras![_isRearCameraSelected ? 0 : 1]);
+                    initCamera(widget.cameras[_isRearCameraSelected ? 0 : 1]);
                   },
                 )),
                 Expanded(

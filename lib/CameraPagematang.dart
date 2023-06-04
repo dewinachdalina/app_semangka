@@ -4,16 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
 
-class CameraPage extends StatefulWidget {
-  const CameraPage({Key? key, required this.cameras}) : super(key: key);
+class CameraPageKematangan extends StatefulWidget {
+  const CameraPageKematangan({Key? key, required this.cameras})
+      : super(key: key);
 
   final List<CameraDescription> cameras;
 
   @override
-  State<CameraPage> createState() => _CameraPageState();
+  State<CameraPageKematangan> createState() => _CameraPageKematanganState();
 }
 
-class _CameraPageState extends State<CameraPage> {
+class _CameraPageKematanganState extends State<CameraPageKematangan> {
   String result = "";
   late CameraController _cameraController;
   late CameraImage _cameraImage;

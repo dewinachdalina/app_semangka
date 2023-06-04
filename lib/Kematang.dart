@@ -20,8 +20,10 @@ class _KematangState extends State<Kematang> {
           child: Center(
         child: ElevatedButton(
           onPressed: () async {
-            await availableCameras().then((value) => Navigator.push(context,
-                MaterialPageRoute(builder: (_) => CameraPage(cameras: value))));
+            await availableCameras().then((value) => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => CameraPageKematangan(cameras: value))));
           },
           child: const Text("Take a Picture"),
         ),

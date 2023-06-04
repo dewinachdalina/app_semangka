@@ -66,6 +66,8 @@ flutter:
   assets:
   - assets/kematangbest-fp16.tflite
   - assets/kematang.txt
+  - assets/jenisbest-fp16.tflite
+  - assets/jenis.txt
   - assets/kematangbest.pt
   - assets/jenisbest.pt
   #   - images/a_dot_ham.jpeg
