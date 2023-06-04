@@ -31,7 +31,7 @@ class _CameraPageKematanganState extends State<CameraPageKematangan> {
   initCamera(CameraDescription cameraDescription) {
     _cameraController =
         CameraController(widget.cameras[0], ResolutionPreset.high);
-    _cameraController.initialize().then((value) {
+    _cameraController.initialize().then((cameras) {
       if (!mounted) {
         return;
       }
@@ -80,16 +80,16 @@ class _CameraPageKematanganState extends State<CameraPageKematangan> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    loadModel();
+  }
+
+  @override
   void dispose() async {
     super.dispose();
     await Tflite.close();
     _cameraController.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    loadModel();
   }
 
   Future takePicture() async {

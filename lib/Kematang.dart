@@ -20,10 +20,11 @@ class _KematangState extends State<Kematang> {
           child: Center(
         child: ElevatedButton(
           onPressed: () async {
-            await availableCameras().then((value) => Navigator.push(
+            WidgetsFlutterBinding.ensureInitialized();
+            await availableCameras().then((cameras) => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (_) => CameraPageKematangan(cameras: value))));
+                    builder: (_) => CameraPageKematangan(cameras: cameras))));
           },
           child: const Text("Take a Picture"),
         ),
