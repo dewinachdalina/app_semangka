@@ -7,7 +7,7 @@ import 'package:tflite/tflite.dart';
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key, required this.cameras}) : super(key: key);
 
-  final List<CameraDescription>? cameras;
+  final List<CameraDescription> cameras;
 
   @override
   State<CameraPage> createState() => _CameraPageState();
@@ -29,7 +29,7 @@ class _CameraPageState extends State<CameraPage> {
 
   initCamera(CameraDescription cameraDescription) {
     _cameraController =
-        CameraController(widget.cameras![0], ResolutionPreset.high);
+        CameraController(widget.cameras[0], ResolutionPreset.high);
     _cameraController.initialize().then((value) {
       if (!mounted) {
         return;
@@ -144,7 +144,7 @@ class _CameraPageState extends State<CameraPage> {
                   onPressed: () {
                     setState(
                         () => _isRearCameraSelected = !_isRearCameraSelected);
-                    initCamera(widget.cameras![_isRearCameraSelected ? 0 : 1]);
+                    initCamera(widget.cameras[_isRearCameraSelected ? 0 : 1]);
                   },
                 )),
                 Expanded(
