@@ -24,7 +24,7 @@ class _CameraPageKematanganState extends State<CameraPageKematangan> {
   loadModel() async {
     await Tflite.loadModel(
       model: 'assets/kematangbest-fp16.tflite',
-      labels: 'assetskematang.txt',
+      labels: 'assets/kematang.txt',
     );
   }
 
