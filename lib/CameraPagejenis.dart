@@ -31,7 +31,7 @@ class _CameraPageJenisState extends State<CameraPageJenis> {
     _cameraController?.dispose(); // Dispose the previous controller if exists
 
     _cameraController =
-        CameraController(cameraDescription, ResolutionPreset.high);
+        CameraController(cameraDescription, ResolutionPreset.low);
 
     try {
       await _cameraController!.initialize();
