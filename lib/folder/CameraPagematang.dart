@@ -1,19 +1,20 @@
-//import 'package:app_semangka/PreviewPage.dart';
+import 'package:app_semangka/PreviewPage.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
 
-class CameraPageJenis extends StatefulWidget {
-  const CameraPageJenis({Key? key, required this.cameras}) : super(key: key);
+class CameraPageKematangan extends StatefulWidget {
+  const CameraPageKematangan({Key? key, required this.cameras})
+      : super(key: key);
 
   final List<CameraDescription> cameras;
 
   @override
-  State<CameraPageJenis> createState() => _CameraPageJenisState();
+  State<CameraPageKematangan> createState() => _CameraPageKematanganState();
 }
 
-class _CameraPageJenisState extends State<CameraPageJenis> {
+class _CameraPageKematanganState extends State<CameraPageKematangan> {
   String result = "";
   CameraController? _cameraController;
   late CameraImage _cameraImage;
@@ -22,8 +23,8 @@ class _CameraPageJenisState extends State<CameraPageJenis> {
 
   loadModel() async {
     await Tflite.loadModel(
-      model: 'assets/jenisbest-fp16.tflite',
-      labels: 'assets/jenis.txt',
+      model: 'assets/kematangbest-fp16.tflite',
+      labels: 'assets/kematang.txt',
     );
   }
 
@@ -94,29 +95,29 @@ class _CameraPageJenisState extends State<CameraPageJenis> {
     await Tflite.close();
   }
 
-  // Future<void> takePicture() async {
-  //   if (_cameraController == null || !_cameraController!.value.isInitialized) {
-  //     return null;
-  //   }
-  //   if (_cameraController!.value.isTakingPicture) {
-  //     return null;
-  //   }
-  //   try {
-  //     await _cameraController!.setFlashMode(FlashMode.off);
-  //     final XFile picture = await _cameraController!.takePicture();
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => PreviewPage(
-  //           picture: picture,
-  //         ),
-  //       ),
-  //     );
-  //   } catch (e) {
-  //     debugPrint('Error occurred while taking a picture: $e');
-  //     return null;
-  //   }
-  // }
+  Future<void> takePicture() async {
+    if (_cameraController == null || !_cameraController!.value.isInitialized) {
+      return null;
+    }
+    if (_cameraController!.value.isTakingPicture) {
+      return null;
+    }
+    try {
+      await _cameraController!.setFlashMode(FlashMode.off);
+      final XFile picture = await _cameraController!.takePicture();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PreviewPage(
+            picture: picture,
+          ),
+        ),
+      );
+    } catch (e) {
+      debugPrint('Error occurred while taking a picture: $e');
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,15 +161,15 @@ class _CameraPageJenisState extends State<CameraPageJenis> {
                         },
                       ),
                     ),
-                    // Expanded(
-                    //   child: IconButton(
-                    //     onPressed: takePicture,
-                    //     iconSize: 50,
-                    //     padding: EdgeInsets.zero,
-                    //     constraints: const BoxConstraints(),
-                    //     icon: const Icon(Icons.circle, color: Colors.white),
-                    //   ),
-                    // ),
+                    Expanded(
+                      child: IconButton(
+                        onPressed: takePicture,
+                        iconSize: 50,
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        icon: const Icon(Icons.circle, color: Colors.white),
+                      ),
+                    ),
                     const Spacer(),
                   ],
                 ),
