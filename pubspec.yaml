@@ -39,6 +39,7 @@ dependencies:
   pytorch_mobile: ^0.2.2
   tflite_flutter: ^0.10.1
   tflite: ^1.1.2
+  flutter_vision: ^1.1.1
 
 dev_dependencies:
   flutter_test:
