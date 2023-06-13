@@ -48,8 +48,8 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
-        minSdkVersion 16
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 21
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
@@ -63,7 +63,7 @@ android {
         }
     }
 
-aaptOptions {
+    aaptOptions {
         noCompress 'tflite'
         noCompress 'lite'
     }
@@ -83,8 +83,3 @@ dependencies {
     
 }
 
-android {
-    defaultConfig {
-        minSdkVersion 21
-    }
-}

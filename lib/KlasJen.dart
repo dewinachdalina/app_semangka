@@ -21,7 +21,9 @@ class _KlasJenState extends State<KlasJen> {
         child: ElevatedButton(
           onPressed: () async {
             await availableCameras().then((value) => Navigator.push(
-                context, MaterialPageRoute(builder: (_) => YoloVideo())));
+                context,
+                MaterialPageRoute(
+                    builder: (_) => CameraPageJenis(cameras: value))));
           },
           child: const Text("Take a Picture"),
         ),
