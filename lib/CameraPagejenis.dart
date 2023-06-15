@@ -63,6 +63,10 @@ class _jenisState extends State<jenis> {
                 onPressed: pickImage,
                 child: const Text("Pick image"),
               ),
+              TextButton(
+                onPressed: snapImage,
+                child: const Text("Camera"),
+              ),
               ElevatedButton(
                 onPressed: yoloOnImage,
                 child: const Text("Detect"),
@@ -89,8 +93,19 @@ class _jenisState extends State<jenis> {
 
   Future<void> pickImage() async {
     final ImagePicker picker = ImagePicker();
-    // Capture a photo
+    // Ambil dari galerry
     final XFile? photo = await picker.pickImage(source: ImageSource.gallery);
+    if (photo != null) {
+      setState(() {
+        imageFile = File(photo.path);
+      });
+    }
+  }
+
+  Future<void> snapImage() async {
+    final ImagePicker picker = ImagePicker();
+    // Ambil dari kamera
+    final XFile? photo = await picker.pickImage(source: ImageSource.camera);
     if (photo != null) {
       setState(() {
         imageFile = File(photo.path);
