@@ -32,31 +32,33 @@ class _MainPageState extends State<MainPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          child: const Text('Klasifikasi Jenis Semangka'),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const KlasJen()),
-                            );
-                          },
-                        ),
-                      ),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: ElevatedButton(
+                              child: const Text('Klasifikasi Jenis Semangka'),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const KlasJen()),
+                                );
+                              },
+                            ),
+                          )),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          child: const Text('Kematangan Semangka'),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Kematang()),
-                            );
-                          },
-                        ),
-                      )
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: ElevatedButton(
+                              child: const Text('Kematangan Semangka'),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Kematang()),
+                                );
+                              },
+                            ),
+                          ))
                     ],
                   ),
                 )

@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vision/flutter_vision.dart';
 import 'package:image_picker/image_picker.dart';
 
-class YoloImage extends StatefulWidget {
-  YoloImage({Key? key}) : super(key: key);
+class jenis extends StatefulWidget {
+  jenis({Key? key}) : super(key: key);
 
   @override
-  State<YoloImage> createState() => _YoloImageState();
+  State<jenis> createState() => _jenisState();
 }
 
-class _YoloImageState extends State<YoloImage> {
+class _jenisState extends State<jenis> {
   late FlutterVision vision;
   late List<Map<String, dynamic>> yoloResults;
   File? imageFile;
