@@ -31,6 +31,32 @@ class _MainPageState extends State<MainPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      CircleAvatar(
+                        radius: 60,
+                        child: Container(
+                          height: 120,
+                          width: 120,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image:
+                                  AssetImage("lib/image/Watermelon Apps.png"),
+                              fit: BoxFit.fitWidth,
+                            ),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(1),
+                        child: const Text(
+                          'Selamat Datang! Silahkan Pilih Sesuai Kebutuhan.',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20),
+                        ),
+                      ),
                       Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
