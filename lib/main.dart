@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     double baseWidth = 278;
     double fem = MediaQuery.of(context).size.width / baseWidth;
-    double ffem = fem * 0.97;
+    // double ffem = fem * 0.97;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Aplikasi Semangka'),
