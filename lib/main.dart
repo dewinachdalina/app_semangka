@@ -19,6 +19,9 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
+    double baseWidth = 278;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
+    double ffem = fem * 0.97;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Aplikasi Semangka'),
@@ -31,30 +34,15 @@ class _MainPageState extends State<MainPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        radius: 60,
-                        child: Container(
-                          height: 120,
-                          width: 120,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image:
-                                  AssetImage("lib/image/Watermelon Apps.png"),
-                              fit: BoxFit.fitWidth,
-                            ),
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                      ),
                       Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.all(1),
-                        child: const Text(
-                          'Selamat Datang! Silahkan Pilih Sesuai Kebutuhan.',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20),
+                        width: 200,
+                        child: Container(
+                          height: 200 * fem,
+                          width: 200,
+                          child: Image.asset(
+                            'lib/image/Logo.png',
+                            fit: BoxFit.fitWidth,
+                          ),
                         ),
                       ),
                       Padding(

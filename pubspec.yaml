@@ -41,6 +41,7 @@ dependencies:
   tflite: ^1.1.2
   flutter_vision: ^1.1.1
   image_picker: ^0.8.8
+  google_fonts: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -70,10 +71,7 @@ flutter:
   - assets/kematang.txt
   - assets/jenisbest-fp16.tflite
   - assets/jenis.txt
-  - assets/kematangbest.pt
-  - assets/jenisbest.pt
-  - lib/image/jenis.png
-  - lib/image/Watermelon Apps.png
+  - lib/image/Logo.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
