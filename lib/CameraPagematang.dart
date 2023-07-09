@@ -68,6 +68,9 @@ class _kematanganState extends State<kematangan> {
                 child: const Text("Camera"),
               ),
               ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll(Color(0xff40652e))),
                 onPressed: yoloOnImage,
                 child: const Text("Detect"),
               )

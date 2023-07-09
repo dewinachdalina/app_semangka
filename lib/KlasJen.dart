@@ -14,11 +14,14 @@ class _KlasJenState extends State<KlasJen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xffa2f271),
         title: const Text("Klasifikasi Jenis Semangka"),
       ),
       body: SafeArea(
           child: Center(
         child: ElevatedButton(
+          style: ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(Color(0xff40652e))),
           onPressed: () async {
             await availableCameras().then((value) => Navigator.push(
                 context, MaterialPageRoute(builder: (_) => jenis())));

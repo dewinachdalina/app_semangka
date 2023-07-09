@@ -68,6 +68,9 @@ class _jenisState extends State<jenis> {
                 child: const Text("Camera"),
               ),
               ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll(Color(0xff40652e))),
                 onPressed: yoloOnImage,
                 child: const Text("Detect"),
               )

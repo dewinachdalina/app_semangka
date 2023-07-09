@@ -24,6 +24,7 @@ class _MainPageState extends State<MainPage> {
     // double ffem = fem * 0.97;
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xffa2f271),
           title: const Text('Aplikasi Semangka'),
         ),
         body: ListView(
@@ -49,6 +50,9 @@ class _MainPageState extends State<MainPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                             child: ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      Color(0xff40652e))),
                               child: const Text('Klasifikasi Jenis Semangka'),
                               onPressed: () {
                                 Navigator.push(
@@ -63,6 +67,9 @@ class _MainPageState extends State<MainPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                             child: ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      Color(0xff40652e))),
                               child: const Text('Kematangan Semangka'),
                               onPressed: () {
                                 Navigator.push(

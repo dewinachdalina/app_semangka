@@ -14,11 +14,14 @@ class _KematangState extends State<Kematang> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xffa2f271),
         title: const Text("Kematangan Semangka"),
       ),
       body: SafeArea(
           child: Center(
         child: ElevatedButton(
+          style: ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(Color(0xff40652e))),
           onPressed: () async {
             WidgetsFlutterBinding.ensureInitialized();
             await availableCameras().then((cameras) => Navigator.push(
